@@ -2186,16 +2186,14 @@ function App() {
   const aseanAgencies = allTradePromotionAgencies.filter(agency => agency.region === 'ASEAN');
 
   const filteredAgencies = useMemo(() => {
-    const agencies = allTradePromotionAgencies;
+    if (!searchTerm) return allTradePromotionAgencies;
     
-    if (!searchTerm) return agencies;
-    
-    return agencies.filter(agency =>
+    return allTradePromotionAgencies.filter(agency =>
       agency.country.toLowerCase().includes(searchTerm.toLowerCase()) ||
       agency.organizationName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       agency.city.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }, [searchTerm, allTradePromotionAgencies]);
+  }, [searchTerm]);
 
   const clearSearch = () => {
     setSearchTerm('');
