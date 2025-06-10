@@ -1,38 +1,667 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.app-header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem 0;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  color: #667eea;
+}
+
+.app-header h1 {
+  color: #2d3748;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.subtitle {
+  color: #4a5568;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.world-map-container {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.world-map h2 {
+  text-align: center;
+  color: #2d3748;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.map-placeholder {
+  position: relative;
+  height: 400px;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.continent {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.north-america {
+  top: 20%;
+  left: 15%;
+}
+
+.europe {
+  top: 25%;
+  left: 45%;
+  gap: 0.5rem;
+}
+
+.asia {
+  top: 20%;
+  right: 15%;
+  gap: 0.5rem;
+}
+
+.oceania {
+  bottom: 15%;
+  right: 20%;
+}
+
+.singapore {
+  transform: translateX(-20px);
+}
+
+.india {
+  transform: translateX(-40px);
+}
+
+.australia {
+  transform: translateY(20px);
+}
+
+.office-marker {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 0.5rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.office-marker:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+}
+
+.office-marker svg {
+  color: #667eea;
+}
+
+.office-marker span {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.9rem;
+}
+
+.selected-office-info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  min-width: 400px;
+  max-width: 90vw;
+}
+
+.office-details h3 {
+  color: #2d3748;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.office-info {
+  margin-bottom: 1.5rem;
+}
+
+.office-info p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #4a5568;
+  font-size: 1rem;
+}
+
+.close-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: #667eea;
   color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.close-btn:hover {
+  background: #5a67d8;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.office-list {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* 사무소 목록 헤더 */
+.office-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.office-list h2 {
+  color: #2d3748;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.office-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.office-card {
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  border-radius: 15px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.office-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
+}
+
+.office-card.selected {
+  border-color: #667eea;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+}
+
+.office-card h3 {
+  color: #2d3748;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.office-card p {
+  color: #4a5568;
+  margin-bottom: 0.5rem;
+}
+
+.office-address {
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.description {
+  font-style: italic;
+  color: #718096;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.office-info a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.office-info a:hover {
+  text-decoration: underline;
+}
+
+.office-card h4 {
+  color: #667eea;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.contact-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.contact-info p {
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.search-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 3rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 25px;
+  font-size: 1rem;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a0aec0;
+}
+
+.clear-search {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.clear-search:hover {
+  background: #f7fafc;
+  color: #4a5568;
+}
+
+.show-all-btn {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.show-all-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #718096;
+}
+
+.no-results p {
+  font-size: 1.1rem;
+}
+
+/* ASEAN 필터 버튼 스타일 */
+.filter-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.asean-btn {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.asean-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+/* ASEAN 정보 박스 */
+.asean-info {
+  background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+  border: 2px solid #fc8181;
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.asean-description {
+  color: #c53030;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ASEAN 국가 카드 특별 스타일 */
+.office-card[data-region="ASEAN"] {
+  background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+  border: 2px solid #fc8181;
+}
+
+.office-card[data-region="ASEAN"]:hover {
+  border-color: #ff6b6b;
+  background: linear-gradient(135deg, #ffebeb 0%, #fbb6b6 100%);
+}
+
+.office-card[data-region="ASEAN"].selected {
+  border-color: #ff6b6b;
+  background: linear-gradient(135deg, #fff5f5 0%, #fbb6b6 100%);
+}
+
+/* ASEAN 지도 섹션 */
+.asean-map-container {
+  background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+/* ASEAN 헤더 */
+.asean-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.asean-map h2 {
+  color: #c53030;
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* 뒤로가기 버튼 */
+.back-to-home-btn {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(66, 153, 225, 0.3);
+}
+
+.back-to-home-btn:hover {
+  background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+}
+
+/* 이메일 템플릿 버튼 */
+.email-template-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.email-template-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* ASEAN 통계 카드 */
+.asean-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+  border: 2px solid #ff8e53;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(255, 142, 83, 0.3);
+}
+
+.stat-card h3 {
+  color: #c53030;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.stat-number {
+  color: #ff6b6b;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ASEAN 국가 마커 그리드 */
+.asean-countries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.asean-country-marker {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+  color: white;
+  border-radius: 15px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.asean-country-marker:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+.asean-country-marker svg {
+  margin-bottom: 0.5rem;
+}
+
+.asean-country-marker span {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .world-map-container,
+  .office-list {
+    padding: 1.5rem;
+  }
+  
+  .map-placeholder {
+    height: 300px;
+  }
+  
+  .continent {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
+  }
+  
+  .selected-office-info {
+    min-width: 300px;
+    padding: 1.5rem;
+  }
+  
+  .office-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filter-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .asean-btn,
+  .show-all-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .asean-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .asean-countries-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stat-card {
+    padding: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  /* 모바일에서 ASEAN 헤더 */
+  .asean-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .back-to-home-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  /* 모바일에서 사무소 목록 헤더 */
+  .office-list-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
   }
 }
