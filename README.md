@@ -132,3 +132,79 @@ npm run deploy
 - [KOTRA](https://www.kotra.or.kr) - 무역진흥공사
 - [React](https://reactjs.org/) - UI 라이브러리
 - [Lucide React](https://lucide.dev/) - 아이콘 라이브러리
+
+## 📧 **이메일 템플릿 기능 상세 설명**
+
+### **🔧 작동 방식**
+1. **버튼 위치**: ASEAN 국가 카드 하단에 **"📧 수출문의 이메일 작성"** 버튼
+2. **클릭 시**: 자동으로 **미리 작성된 이메일**이 기본 메일 프로그램에서 열림
+3. **자동 입력**: 받는 사람(해당 기관 이메일)과 제목, 본문이 **자동으로 채워짐**
+
+### **📝 실제 생성되는 이메일 템플릿**
+
+#### **이메일 제목**
+```
+Partnership Inquiry - Korean Technology Solutions
+```
+
+#### **이메일 본문** (예: 싱가포르 Enterprise Singapore)
+```
+Dear Enterprise Singapore Team,
+
+I hope this email finds you well. I am writing to introduce our company and explore potential collaboration opportunities in 싱가포르.
+
+Our Company:
+- Korean technology company specializing in innovative solutions
+- Proven track record in airport security and border control systems
+- Looking to expand operations in the ASEAN region
+
+Our Solutions:
+📋 Airport document verification systems
+🛂 Immigration and border control technology
+🔒 Government security solutions
+📄 Document digitization and processing
+
+We would be very interested in:
+✅ Learning about current government ICT procurement opportunities
+✅ Connecting with local system integrators
+✅ Understanding regulatory requirements for our technology
+✅ Exploring potential pilot projects
+
+Attached Materials:
+- Company introduction (English)
+- Technical specifications
+- Airport implementation case studies
+
+We would greatly appreciate the opportunity to discuss how our technology can support 싱가포르's digital transformation initiatives.
+
+Thank you for your time and consideration. I look forward to your response.
+
+Best regards,
+[Your Name]
+[Your Title]
+[Company Name]
+[Contact Information]
+
+---
+Generated via KOTRA Global Trade Network Platform
+```
+
+### **🎯 자동 삽입되는 정보**
+- ✅ **기관명**: `${agency.organizationName}` (예: Enterprise Singapore)
+- ✅ **국가명**: `${agency.country}` (예: 싱가포르)
+- ✅ **받는 사람**: `${agency.email}` (예: enquiry@enterprisesg.gov.sg)
+
+### **📱 사용 방법**
+1. **ASEAN 지도에서 국가 클릭** 또는 **전체 목록에서 ASEAN 국가 찾기**
+2. 해당 국가 카드에서 **"📧 수출문의 이메일 작성"** 버튼 클릭
+3. **기본 메일 프로그램**(Outlook, Gmail 등)이 자동으로 열림
+4. **이미 작성된 템플릿**을 확인하고 필요에 따라 수정
+5. **[Your Name] 등 개인정보 입력** 후 전송
+
+### **💡 특징**
+- **완전 자동화**: 클릭 한 번으로 전문적인 비즈니스 이메일 생성
+- **개인화**: 각 국가와 기관에 맞게 자동으로 정보 삽입
+- **전문적 내용**: 한국 기업의 해외진출에 특화된 내용
+- **ASEAN 전용**: ASEAN 10개국에만 제공되는 특별 기능
+
+이 기능으로 ASEAN 무역진흥기관에 체계적이고 전문적인 문의를 쉽게 보낼 수 있습니다! 🚀

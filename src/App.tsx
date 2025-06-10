@@ -2200,11 +2200,47 @@ function App() {
     setShowAllCountries(false);
   };
 
+  // 국가명 한국어 -> 영어 매핑
+  const countryNameMapping: { [key: string]: string } = {
+    '싱가포르': 'Singapore',
+    '베트남': 'Vietnam',
+    '태국': 'Thailand',
+    '말레이시아': 'Malaysia',
+    '인도네시아': 'Indonesia',
+    '필리핀': 'Philippines',
+    '라오스': 'Laos',
+    '캄보디아': 'Cambodia',
+    '미얀마': 'Myanmar',
+    '브루나이': 'Brunei',
+    '미국': 'United States',
+    '중국': 'China',
+    '일본': 'Japan',
+    '독일': 'Germany',
+    '영국': 'United Kingdom',
+    '호주': 'Australia',
+    '인도': 'India',
+    '프랑스': 'France',
+    '이탈리아': 'Italy',
+    '스페인': 'Spain',
+    '네덜란드': 'Netherlands',
+    '스위스': 'Switzerland',
+    '스웨덴': 'Sweden',
+    '노르웨이': 'Norway',
+    '덴마크': 'Denmark',
+    '핀란드': 'Finland'
+  };
+
+  const getEnglishCountryName = (koreanName: string): string => {
+    return countryNameMapping[koreanName] || koreanName;
+  };
+
   const generateEmailTemplate = (agency: TradeAgency) => {
+    const englishCountryName = getEnglishCountryName(agency.country);
+    console.log('Debug: 원본 국가명:', agency.country, '→ 변환된 국가명:', englishCountryName);
     const subject = `Partnership Inquiry - Korean Technology Solutions`;
     const body = `Dear ${agency.organizationName} Team,
 
-I hope this email finds you well. I am writing to introduce our company and explore potential collaboration opportunities in ${agency.country}.
+I hope this email finds you well. I am writing to introduce our company and explore potential collaboration opportunities in ${englishCountryName}.
 
 Our Company:
 - Korean technology company specializing in innovative solutions
@@ -2228,7 +2264,7 @@ Attached Materials:
 - Technical specifications
 - Airport implementation case studies
 
-We would greatly appreciate the opportunity to discuss how our technology can support ${agency.country}'s digital transformation initiatives.
+We would greatly appreciate the opportunity to discuss how our technology can support ${englishCountryName}'s digital transformation initiatives.
 
 Thank you for your time and consideration. I look forward to your response.
 
@@ -2342,6 +2378,19 @@ Generated via KOTRA Global Trade Network Platform`;
                 <p>✉️ <a href={`mailto:${selectedAgency.email}`}>{selectedAgency.email}</a></p>
                 <p>🌐 <a href={`https://${selectedAgency.website}`} target="_blank" rel="noopener noreferrer">{selectedAgency.website}</a></p>
               </div>
+              
+              {/* ASEAN 국가인 경우 이메일 템플릿 버튼 추가 */}
+              {selectedAgency.region === 'ASEAN' && (
+                <div className="email-template-section">
+                  <button 
+                    className="email-template-btn"
+                    onClick={() => handleEmailTemplate(selectedAgency)}
+                  >
+                    📧 수출문의 이메일 작성
+                  </button>
+                </div>
+              )}
+              
               <button 
                 className="close-btn"
                 onClick={() => setSelectedAgency(null)}
