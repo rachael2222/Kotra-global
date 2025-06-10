@@ -25,10 +25,10 @@
 
 ```bash
 # 프로젝트 클론
-git clone https://github.com/YOUR_USERNAME/kotra-global-trade-network.git
+git clone https://github.com/rachael2222/Kotra-global.git
 
 # 디렉터리 이동
-cd kotra-global-trade-network
+cd Kotra-global
 
 # 의존성 설치
 npm install
@@ -99,7 +99,7 @@ npm run build
 npm install --save-dev gh-pages
 
 # package.json에 homepage 추가
-"homepage": "https://YOUR_USERNAME.github.io/kotra-global-trade-network"
+"homepage": "https://rachael2222.github.io/Kotra-global"
 
 # 배포 스크립트 추가
 "scripts": {
@@ -125,7 +125,7 @@ npm run deploy
 
 ## 📞 연락처
 
-프로젝트 관련 문의: [GitHub Issues](https://github.com/YOUR_USERNAME/kotra-global-trade-network/issues)
+프로젝트 관련 문의: [GitHub Issues](https://github.com/rachael2222/Kotra-global/issues)
 
 ## 🙏 감사의 말
 
