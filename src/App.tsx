@@ -2201,13 +2201,13 @@ function App() {
   };
 
   const generateEmailTemplate = (agency: TradeAgency) => {
-    const subject = `Partnership Inquiry - Korean OCR Technology Solutions`;
+    const subject = `Partnership Inquiry - Korean Technology Solutions`;
     const body = `Dear ${agency.organizationName} Team,
 
 I hope this email finds you well. I am writing to introduce our company and explore potential collaboration opportunities in ${agency.country}.
 
 Our Company:
-- Korean technology company specializing in OCR (Optical Character Recognition) solutions
+- Korean technology company specializing in innovative solutions
 - Proven track record in airport security and border control systems
 - Looking to expand operations in the ASEAN region
 
