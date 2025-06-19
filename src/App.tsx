@@ -83,45 +83,15 @@ function App() {
               ))}
             </div>
           </div>
-
-          {/* 사용 방법 */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h3 className="font-semibold text-gray-800 mb-3">📋 사용 방법</h3>
-            <ul className="text-sm text-gray-600 space-y-2">
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                상단 검색바에서 국가명을 검색하세요
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                기관 카드를 클릭하여 상세 정보를 확인하세요
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-                연락처를 클릭하여 바로 연락할 수 있습니다
-              </li>
-            </ul>
-          </div>
         </div>
 
-        {/* 사이드바 - 기관 정보 */}
+        {/* 선택된 기관 정보 사이드바 */}
         {selectedAgency && (
-          <AgencyInfo 
-            agency={selectedAgency}
-            onClose={() => setSelectedAgency(null)}
-          />
+          <AgencyInfo agency={selectedAgency} onClose={() => setSelectedAgency(null)} />
         )}
       </div>
-
-      {/* 푸터 */}
-      <footer className="bg-white border-t border-gray-200 px-6 py-3">
-        <div className="flex items-center justify-between text-sm text-gray-600">
-          <p>© 2024 Global Trade Support. 전세계 수출지원기관 정보를 한 곳에서.</p>
-          <p>Made with ❤️ for Korean exporters</p>
-        </div>
-      </footer>
     </div>
   );
 }
 
-export default App; 
+export default App;

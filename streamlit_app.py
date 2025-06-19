@@ -45,69 +45,128 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 샘플 데이터 (실제 KOTRA 데이터로 교체 가능)
+# 전 세계 무역진흥기관 데이터 (확장된 리스트)
 @st.cache_data
 def load_agencies_data():
     agencies = [
+        # 주요 국가들 (featured)
         {
-            "country": "South Korea",
-            "city": "Seoul",
-            "name": "KOTRA Headquarters",
+            "country": "미국",
+            "organizationName": "International Trade Administration (ITA)",
+            "city": "워싱턴 D.C.",
+            "latitude": 38.9072,
+            "longitude": -77.0369,
+            "address": "1401 Constitution Ave NW, Washington, DC 20230",
+            "phone": "+1-202-482-2000",
+            "email": "contact@trade.gov",
+            "website": "www.trade.gov",
+            "description": "미국 상무부 국제무역청",
+            "featured": True
+        },
+        {
+            "country": "중국",
+            "organizationName": "CCPIT (중국국제무역촉진위원회)",
+            "city": "베이징",
+            "latitude": 39.9042,
+            "longitude": 116.4074,
+            "address": "1 Fuxingmenwai Street, Beijing 100860",
+            "phone": "+86-10-8807-5000",
+            "email": "ccpit@ccpit.org",
+            "website": "www.ccpit.org",
+            "description": "중국 최대 무역투자 촉진기관",
+            "featured": True
+        },
+        {
+            "country": "일본",
+            "organizationName": "JETRO (일본무역진흥기구)",
+            "city": "도쿄",
+            "latitude": 35.6762,
+            "longitude": 139.6503,
+            "address": "Ark Mori Building, 1-12-32 Akasaka, Minato-ku, Tokyo",
+            "phone": "+81-3-3582-5511",
+            "email": "jetro@jetro.go.jp",
+            "website": "www.jetro.go.jp",
+            "description": "일본 경제산업성 산하 무역진흥기관",
+            "featured": True
+        },
+        {
+            "country": "독일",
+            "organizationName": "GTAI (Germany Trade & Invest)",
+            "city": "베를린",
+            "latitude": 52.5200,
+            "longitude": 13.4050,
+            "address": "Friedrichstrasse 60, 10117 Berlin",
+            "phone": "+49-30-200-099-0",
+            "email": "contact@gtai.de",
+            "website": "www.gtai.de",
+            "description": "독일 연방경제기후보호부 산하 무역투자진흥기관",
+            "featured": True
+        },
+        {
+            "country": "영국",
+            "organizationName": "DBT (Department for Business and Trade)",
+            "city": "런던",
+            "latitude": 51.5074,
+            "longitude": -0.1278,
+            "address": "Old Admiralty Building, Admiralty Place, London SW1A 2DY",
+            "phone": "+44-20-4551-0011",
+            "email": "DBTNA@businessandtrade.gov.uk",
+            "website": "www.gov.uk/government/organisations/department-for-business-and-trade",
+            "description": "영국 정부 비즈니스 무역부",
+            "featured": True
+        },
+        {
+            "country": "싱가포르",
+            "organizationName": "Enterprise Singapore",
+            "city": "싱가포르",
+            "latitude": 1.3000,
+            "longitude": 103.8565,
+            "address": "230 Victoria St, #10-00, Singapore 188024",
+            "phone": "+65-6898-1800",
+            "email": "enquiry@enterprisesg.gov.sg",
+            "website": "www.enterprisesg.gov.sg",
+            "description": "싱가포르 기업청 - 기업 성장 및 국제화 지원",
+            "featured": True,
+            "region": "ASEAN"
+        },
+        {
+            "country": "호주",
+            "organizationName": "Austrade (Australian Trade and Investment Commission)",
+            "city": "시드니",
+            "latitude": -33.8688,
+            "longitude": 151.2093,
+            "address": "Level 11, 47 York Street, Sydney NSW 2000",
+            "phone": "+61-2-9262-4011",
+            "email": "info@austrade.gov.au",
+            "website": "www.austrade.gov.au",
+            "description": "호주 정부 무역투자진흥위원회",
+            "featured": True
+        },
+        {
+            "country": "인도",
+            "organizationName": "FIEO - Federation of Indian Export Organisations",
+            "city": "뉴델리",
+            "latitude": 28.6139,
+            "longitude": 77.2090,
+            "address": "Vanijya Bhawan, International Trade Centre, New Delhi 110001",
+            "phone": "+91-11-2331-4171",
+            "email": "fieo@fieo.org",
+            "website": "www.indiantradeportal.in",
+            "description": "인도 수출기구연합회 - 무역진흥 및 수출촉진",
+            "featured": True
+        },
+        {
+            "country": "한국",
+            "organizationName": "KOTRA (대한무역투자진흥공사)",
+            "city": "서울",
+            "latitude": 37.5665,
+            "longitude": 126.9780,
             "address": "13, Heolleung-ro, Seocho-gu, Seoul",
             "phone": "+82-2-3460-7114",
             "email": "info@kotra.or.kr",
-            "website": "https://www.kotra.or.kr",
-            "services": ["Trade Promotion", "Investment Support", "Market Research"],
-            "lat": 37.5665,
-            "lng": 126.9780
-        },
-        {
-            "country": "United States",
-            "city": "New York",
-            "name": "KOTRA New York",
-            "address": "460 Park Avenue, New York, NY 10022",
-            "phone": "+1-212-826-0900",
-            "email": "newyork@kotra.or.kr",
-            "website": "https://www.kotra.or.kr/usa",
-            "services": ["Trade Promotion", "Investment Support"],
-            "lat": 40.7128,
-            "lng": -74.0060
-        },
-        {
-            "country": "Germany",
-            "city": "Frankfurt",
-            "name": "KOTRA Frankfurt",
-            "address": "Kaiserstraße 11, 60311 Frankfurt",
-            "phone": "+49-69-920-7170",
-            "email": "frankfurt@kotra.or.kr",
-            "website": "https://www.kotra.or.kr/germany",
-            "services": ["Trade Promotion", "Market Research"],
-            "lat": 50.1109,
-            "lng": 8.6821
-        },
-        {
-            "country": "Japan",
-            "city": "Tokyo",
-            "name": "KOTRA Tokyo",
-            "address": "2-2-2 Marunouchi, Chiyoda-ku, Tokyo",
-            "phone": "+81-3-3211-1900",
-            "email": "tokyo@kotra.or.kr",
-            "website": "https://www.kotra.or.kr/japan",
-            "services": ["Trade Promotion", "Investment Support"],
-            "lat": 35.6762,
-            "lng": 139.6503
-        },
-        {
-            "country": "China",
-            "city": "Beijing",
-            "name": "KOTRA Beijing",
-            "address": "No. 1 Jianguomenwai Avenue, Beijing",
-            "phone": "+86-10-6505-1188",
-            "email": "beijing@kotra.or.kr",
-            "website": "https://www.kotra.or.kr/china",
-            "services": ["Trade Promotion", "Market Research"],
-            "lat": 39.9042,
-            "lng": 116.4074
+            "website": "www.kotra.or.kr",
+            "description": "한국 정부 무역투자진흥기관",
+            "featured": True
         }
     ]
     return pd.DataFrame(agencies)
@@ -124,18 +183,18 @@ def create_world_map(agencies_df):
     # 각 기관에 마커 추가
     for idx, row in agencies_df.iterrows():
         folium.Marker(
-            location=[row['lat'], row['lng']],
+            location=[row['latitude'], row['longitude']],
             popup=f"""
-            <div style="width: 200px;">
-                <h4>{row['name']}</h4>
+            <div style="width: 250px;">
+                <h4>{row['organizationName']}</h4>
                 <p><strong>Country:</strong> {row['country']}</p>
                 <p><strong>City:</strong> {row['city']}</p>
                 <p><strong>Phone:</strong> {row['phone']}</p>
                 <p><strong>Email:</strong> {row['email']}</p>
-                <p><strong>Website:</strong> <a href="{row['website']}" target="_blank">Visit</a></p>
+                <p><strong>Website:</strong> <a href="https://{row['website']}" target="_blank">Visit</a></p>
             </div>
             """,
-            tooltip=row['name'],
+            tooltip=row['organizationName'],
             icon=folium.Icon(color='red', icon='info-sign')
         ).add_to(m)
     
@@ -156,13 +215,6 @@ def main():
     countries = ['All'] + sorted(agencies_df['country'].unique().tolist())
     selected_country = st.sidebar.selectbox("Select Country", countries)
     
-    # 서비스별 필터
-    all_services = []
-    for services in agencies_df['services']:
-        all_services.extend(services)
-    unique_services = ['All'] + sorted(list(set(all_services)))
-    selected_service = st.sidebar.selectbox("Select Service", unique_services)
-    
     # 검색어
     search_term = st.sidebar.text_input("Search by name or city", "").lower()
     
@@ -172,12 +224,9 @@ def main():
     if selected_country != 'All':
         filtered_df = filtered_df[filtered_df['country'] == selected_country]
     
-    if selected_service != 'All':
-        filtered_df = filtered_df[filtered_df['services'].apply(lambda x: selected_service in x)]
-    
     if search_term:
         filtered_df = filtered_df[
-            filtered_df['name'].str.lower().str.contains(search_term) |
+            filtered_df['organizationName'].str.lower().str.contains(search_term) |
             filtered_df['city'].str.lower().str.contains(search_term)
         ]
     
@@ -198,8 +247,8 @@ def main():
         
         # 통계 정보
         st.metric("Total Agencies", len(agencies_df))
+        st.metric("Featured Agencies", len(agencies_df[agencies_df['featured'] == True]))
         st.metric("Countries Covered", len(agencies_df['country'].unique()))
-        st.metric("Filtered Results", len(filtered_df))
         
         # 국가별 분포
         st.markdown("### Countries Distribution")
@@ -207,32 +256,19 @@ def main():
         st.bar_chart(country_counts)
     
     # 기관 목록
-    st.markdown('<h2 class="sub-header">🏢 Agency Directory</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="sub-header">📋 Agency List</h2>', unsafe_allow_html=True)
     
-    if not filtered_df.empty:
-        for idx, row in filtered_df.iterrows():
-            with st.expander(f"📍 {row['name']} - {row['city']}, {row['country']}"):
-                col1, col2 = st.columns([2, 1])
-                
-                with col1:
-                    st.markdown(f"**Address:** {row['address']}")
-                    st.markdown(f"**Phone:** {row['phone']}")
-                    st.markdown(f"**Email:** {row['email']}")
-                    st.markdown(f"**Website:** [{row['website']}]({row['website']})")
-                
-                with col2:
-                    st.markdown("**Services:**")
-                    for service in row['services']:
-                        st.markdown(f"• {service}")
-    
-    # 푸터
-    st.markdown("---")
-    st.markdown("""
-    <div style="text-align: center; color: #666;">
-        <p>© 2024 Global Trade-Investment Promotion Agency Platform</p>
-        <p>Powered by Streamlit | Data provided by KOTRA</p>
-    </div>
-    """, unsafe_allow_html=True)
+    for idx, row in filtered_df.iterrows():
+        with st.container():
+            st.markdown(f"""
+            <div class="agency-card">
+                <h3>{row['organizationName']}</h3>
+                <p><strong>Country:</strong> {row['country']} | <strong>City:</strong> {row['city']}</p>
+                <p><strong>Phone:</strong> {row['phone']} | <strong>Email:</strong> {row['email']}</p>
+                <p><strong>Website:</strong> <a href="https://{row['website']}" target="_blank">{row['website']}</a></p>
+                <p><strong>Description:</strong> {row['description']}</p>
+            </div>
+            """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main() 
