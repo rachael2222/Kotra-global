@@ -1,3 +1,4 @@
+import React from 'react';
 import { Agency } from '../data/agencies';
 
 // API 설정
