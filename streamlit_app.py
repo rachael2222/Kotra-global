@@ -4,6 +4,7 @@ import folium
 from streamlit_folium import folium_static
 import json
 from typing import Dict, List
+import urllib.parse
 
 # 페이지 설정
 st.set_page_config(
@@ -2475,12 +2476,39 @@ def create_world_map(agencies_df):
             icon_color = 'blue'
             icon_size = [20, 20]
         
+        # 이메일 템플릿 생성
+        email_template = get_email_template(row['country'], row['organizationName'], row['email'])
+        # URL 인코딩을 위한 간단한 템플릿 (전체 템플릿은 너무 길어서 기본 내용만)
+        subject = f"[비즈니스 문의] {row['country']} 진출 관련 상담 요청"
+        body = f"""안녕하세요,
+
+{row['organizationName']} 담당자님께,
+
+저는 한국의 [회사명]에서 근무하고 있는 [이름]입니다.
+
+{row['country']} 시장 진출을 고려하고 있어 {row['organizationName']}의 지원 서비스에 대해 문의드립니다.
+
+상세한 상담을 위해 연락드립니다.
+
+감사합니다.
+
+[이름]
+[회사명]
+[직책]
+[연락처]
+[이메일]"""
+        
+        # URL 인코딩
+        encoded_subject = urllib.parse.quote(subject)
+        encoded_body = urllib.parse.quote(body)
+        mailto_link = f"mailto:{row['email']}?subject={encoded_subject}&body={encoded_body}"
+        
         folium.Marker(
             location=[row['latitude'], row['longitude']],
             popup=f"""
             <b>{row['country']}</b><br>
             {row['organizationName']}<br>
-            📧 <a href="mailto:{row['email']}">{row['email']}</a><br>
+            📧 <a href="{mailto_link}">{row['email']}</a><br>
             📞 {row['phone']}<br>
             🌐 <a href="https://{row['website']}" target="_blank">{row['website']}</a>
             """,
@@ -2538,13 +2566,40 @@ def main():
     
     if len(filtered_df) > 0:
         for idx, row in filtered_df.iterrows():
+            # 이메일 템플릿 생성
+            email_template = get_email_template(row['country'], row['organizationName'], row['email'])
+            # URL 인코딩을 위한 간단한 템플릿
+            subject = f"[비즈니스 문의] {row['country']} 진출 관련 상담 요청"
+            body = f"""안녕하세요,
+
+{row['organizationName']} 담당자님께,
+
+저는 한국의 [회사명]에서 근무하고 있는 [이름]입니다.
+
+{row['country']} 시장 진출을 고려하고 있어 {row['organizationName']}의 지원 서비스에 대해 문의드립니다.
+
+상세한 상담을 위해 연락드립니다.
+
+감사합니다.
+
+[이름]
+[회사명]
+[직책]
+[연락처]
+[이메일]"""
+            
+            # URL 인코딩
+            encoded_subject = urllib.parse.quote(subject)
+            encoded_body = urllib.parse.quote(body)
+            mailto_link = f"mailto:{row['email']}?subject={encoded_subject}&body={encoded_body}"
+            
             st.markdown(f"""
             <div class="agency-card">
                 <h3>{row['country']} - {row['organizationName']}</h3>
                 <p><strong>도시:</strong> {row['city']}</p>
                 <p><strong>주소:</strong> {row['address']}</p>
                 <p><strong>전화:</strong> {row['phone']}</p>
-                <p><strong>이메일:</strong> <a href="mailto:{row['email']}">{row['email']}</a></p>
+                <p><strong>이메일:</strong> <a href="{mailto_link}">{row['email']}</a></p>
                 <p><strong>웹사이트:</strong> <a href="https://{row['website']}" target="_blank">{row['website']}</a></p>
                 <p><strong>설명:</strong> {row['description']}</p>
             </div>
