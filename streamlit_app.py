@@ -2478,25 +2478,33 @@ def create_world_map(agencies_df):
         
         # 이메일 템플릿 생성
         email_template = get_email_template(row['country'], row['organizationName'], row['email'])
-        # URL 인코딩을 위한 간단한 템플릿 (전체 템플릿은 너무 길어서 기본 내용만)
-        subject = f"[비즈니스 문의] {row['country']} 진출 관련 상담 요청"
-        body = f"""안녕하세요,
+        # URL 인코딩을 위한 영어 템플릿
+        subject = f"[Business Inquiry] Consultation Request for {row['country']} Market Entry"
+        body = f"""Dear {row['organizationName']} Team,
 
-{row['organizationName']} 담당자님께,
+I hope this email finds you well.
 
-저는 한국의 [회사명]에서 근무하고 있는 [이름]입니다.
+I am [Name] from [Company Name] in South Korea, and I am reaching out regarding potential business opportunities in {row['country']}.
 
-{row['country']} 시장 진출을 고려하고 있어 {row['organizationName']}의 지원 서비스에 대해 문의드립니다.
+We are interested in exploring the {row['country']} market and would appreciate your guidance on:
 
-상세한 상담을 위해 연락드립니다.
+- Market entry strategies for {row['country']}
+- Local partnership opportunities
+- Investment incentives and regulations
+- Trade promotion programs
+- Business networking events
 
-감사합니다.
+We would be grateful for any information or assistance you could provide.
 
-[이름]
-[회사명]
-[직책]
-[연락처]
-[이메일]"""
+Thank you for your time and consideration.
+
+Best regards,
+
+[Name]
+[Position]
+[Company Name]
+[Contact Number]
+[Email Address]"""
         
         # URL 인코딩
         encoded_subject = urllib.parse.quote(subject)
@@ -2568,25 +2576,33 @@ def main():
         for idx, row in filtered_df.iterrows():
             # 이메일 템플릿 생성
             email_template = get_email_template(row['country'], row['organizationName'], row['email'])
-            # URL 인코딩을 위한 간단한 템플릿
-            subject = f"[비즈니스 문의] {row['country']} 진출 관련 상담 요청"
-            body = f"""안녕하세요,
+            # URL 인코딩을 위한 영어 템플릿
+            subject = f"[Business Inquiry] Consultation Request for {row['country']} Market Entry"
+            body = f"""Dear {row['organizationName']} Team,
 
-{row['organizationName']} 담당자님께,
+I hope this email finds you well.
 
-저는 한국의 [회사명]에서 근무하고 있는 [이름]입니다.
+I am [Name] from [Company Name] in South Korea, and I am reaching out regarding potential business opportunities in {row['country']}.
 
-{row['country']} 시장 진출을 고려하고 있어 {row['organizationName']}의 지원 서비스에 대해 문의드립니다.
+We are interested in exploring the {row['country']} market and would appreciate your guidance on:
 
-상세한 상담을 위해 연락드립니다.
+- Market entry strategies for {row['country']}
+- Local partnership opportunities
+- Investment incentives and regulations
+- Trade promotion programs
+- Business networking events
 
-감사합니다.
+We would be grateful for any information or assistance you could provide.
 
-[이름]
-[회사명]
-[직책]
-[연락처]
-[이메일]"""
+Thank you for your time and consideration.
+
+Best regards,
+
+[Name]
+[Position]
+[Company Name]
+[Contact Number]
+[Email Address]"""
             
             # URL 인코딩
             encoded_subject = urllib.parse.quote(subject)
