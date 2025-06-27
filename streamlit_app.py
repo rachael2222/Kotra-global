@@ -78,28 +78,220 @@ def generate_email_template(row):
     region = get_region(row['country'])
     if region == 'asia':
         subject = f"[수출 문의] {row['country']} 시장 진출 관련 상담 요청"
-        body = f"""안녕하세요, {row['organizationName']} 담당자님,\n\n저는 한국의 [회사명]에서 근무하고 있는 [이름]입니다.\n\n{row['country']} 시장 진출을 고려하고 있어서, {row['organizationName']}의 지원 서비스에 대해 문의드립니다.\n\n주요 문의사항:\n1. {row['country']} 시장 진출을 위한 지원 프로그램\n2. 현지 파트너사 연결 서비스\n3. 시장 조사 및 컨설팅 서비스\n4. 투자 관련 정보 및 절차\n5. 현지 법규 및 규제 정보\n\n추가로 궁금한 점:\n- 지원 서비스 이용 절차\n- 필요한 서류 및 준비사항\n- 서비스 이용 비용\n- 예상 소요 기간\n- 현지 문화 및 비즈니스 관습\n\n연락 가능한 시간: [연락 가능 시간]\n연락처: [전화번호]\n\n상세한 상담을 위해 회신 부탁드립니다.\n\n감사합니다.\n\n[이름]\n[회사명]\n[직책]\n[연락처]"""
+        body = f"""안녕하세요, {row['organizationName']} 담당자님,
+
+저는 한국에서 근무하고 있는 [이름]입니다.
+
+{row['country']} 시장 진출을 고려하고 있어서, {row['organizationName']}의 지원 서비스에 대해 문의드립니다.
+
+주요 문의사항:
+1. {row['country']} 시장 진출을 위한 지원 프로그램
+2. 현지 파트너사 연결 서비스
+3. 시장 조사 및 컨설팅 서비스
+4. 투자 관련 정보 및 절차
+5. 현지 법규 및 규제 정보
+
+추가로 궁금한 점:
+- 지원 서비스 이용 절차
+- 필요한 서류 및 준비사항
+- 서비스 이용 비용
+- 예상 소요 기간
+- 현지 문화 및 비즈니스 관습
+
+상세한 상담을 위해 회신 부탁드립니다.
+
+감사합니다.
+
+[이름]"""
     elif region == 'europe':
         subject = f"[Export Inquiry] Request for Consultation on Entering {row['country']} Market"
-        body = f"""Dear {row['organizationName']} Team,\n\nI am [Name] from [Company Name] in South Korea.\n\nWe are considering expanding our business to {row['country']} and would like to inquire about the support services provided by {row['organizationName']}.\n\nMain inquiries:\n1. Market entry support programs for {row['country']}\n2. Local partner connection services\n3. Market research and consulting services\n4. Investment information and procedures\n5. EU regulations and compliance (if applicable)\n\nAdditional questions:\n- Service application procedures\n- Required documents and preparations\n- Service costs\n- Expected processing time\n- Local business culture and practices\n\nAvailable contact time: [Available time]\nContact: [Phone number]\n\nWe look forward to your response for detailed consultation.\n\nBest regards,\n\n[Name]\n[Company Name]\n[Position]\n[Contact]"""
+        body = f"""Dear {row['organizationName']} Team,
+
+I am [Name] from South Korea.
+
+We are considering expanding our business to {row['country']} and would like to inquire about the support services provided by {row['organizationName']}.
+
+Main inquiries:
+1. Market entry support programs for {row['country']}
+2. Local partner connection services
+3. Market research and consulting services
+4. Investment information and procedures
+5. EU regulations and compliance (if applicable)
+
+Additional questions:
+- Service application procedures
+- Required documents and preparations
+- Service costs
+- Expected processing time
+- Local business culture and practices
+
+We look forward to your response for detailed consultation.
+
+Best regards,
+
+[Name]"""
     elif region == 'northAmerica':
         subject = f"[Export Inquiry] Request for Consultation on Entering {row['country']} Market"
-        body = f"""Dear {row['organizationName']} Team,\n\nI am [Name] from [Company Name] in South Korea.\n\nWe are interested in expanding our business to {row['country']} and would like to learn more about the support services offered by {row['organizationName']}.\n\nKey inquiries:\n1. Market entry support programs for {row['country']}\n2. Local partner network services\n3. Market research and consulting services\n4. Investment facilitation and procedures\n5. Regulatory compliance information\n\nAdditional questions:\n- Service application process\n- Required documentation\n- Service fees and costs\n- Expected timeline\n- Local market insights\n\nAvailable for contact: [Available time]\nPhone: [Phone number]\n\nWe would appreciate your response for detailed consultation.\n\nThank you.\n\n[Name]\n[Company Name]\n[Position]\n[Contact]"""
+        body = f"""Dear {row['organizationName']} Team,
+
+I am [Name] from South Korea.
+
+We are interested in expanding our business to {row['country']} and would like to learn more about the support services offered by {row['organizationName']}.
+
+Key inquiries:
+1. Market entry support programs for {row['country']}
+2. Local partner network services
+3. Market research and consulting services
+4. Investment facilitation and procedures
+5. Regulatory compliance information
+
+Additional questions:
+- Service application process
+- Required documentation
+- Service fees and costs
+- Expected timeline
+- Local market insights
+
+We would appreciate your response for detailed consultation.
+
+Thank you.
+
+[Name]"""
     elif region == 'southAmerica':
         subject = f"[Consulta de Exportación] Solicitud de Asesoría para Ingresar al Mercado de {row['country']}"
-        body = f"""Estimado equipo de {row['organizationName']},\n\nSoy [Nombre] de [Nombre de la empresa] en Corea del Sur.\n\nEstamos considerando expandir nuestro negocio a {row['country']} y nos gustaría consultar sobre los servicios de apoyo proporcionados por {row['organizationName']}.\n\nConsultas principales:\n1. Programas de apoyo para entrada al mercado de {row['country']}\n2. Servicios de conexión con socios locales\n3. Servicios de investigación de mercado y consultoría\n4. Información y procedimientos de inversión\n5. Información sobre regulaciones locales\n\nPreguntas adicionales:\n- Procedimientos de aplicación de servicios\n- Documentos requeridos y preparaciones\n- Costos de servicios\n- Tiempo de procesamiento esperado\n- Cultura empresarial local\n\nTiempo disponible para contacto: [Tiempo disponible]\nTeléfono: [Número de teléfono]\n\nEsperamos su respuesta para una consulta detallada.\n\nSaludos cordiales,\n\n[Nombre]\n[Nombre de la empresa]\n[Cargo]\n[Contacto]"""
+        body = f"""Estimado equipo de {row['organizationName']},
+
+Soy [Nombre] de Corea del Sur.
+
+Estamos considerando expandir nuestro negocio a {row['country']} y nos gustaría consultar sobre los servicios de apoyo proporcionados por {row['organizationName']}.
+
+Consultas principales:
+1. Programas de apoyo para entrada al mercado de {row['country']}
+2. Servicios de conexión con socios locales
+3. Servicios de investigación de mercado y consultoría
+4. Información y procedimientos de inversión
+5. Información sobre regulaciones locales
+
+Preguntas adicionales:
+- Procedimientos de aplicación de servicios
+- Documentos requeridos y preparaciones
+- Costos de servicios
+- Tiempo de procesamiento esperado
+- Cultura empresarial local
+
+Esperamos su respuesta para una consulta detallada.
+
+Saludos cordiales,
+
+[Nombre]"""
     elif region == 'africa':
         subject = f"[Export Inquiry] Request for Consultation on Entering {row['country']} Market"
-        body = f"""Dear {row['organizationName']} Team,\n\nI am [Name] from [Company Name] in South Korea.\n\nWe are exploring business opportunities in {row['country']} and would like to inquire about the support services provided by {row['organizationName']}.\n\nMain inquiries:\n1. Market entry support programs for {row['country']}\n2. Local partner connection services\n3. Market research and consulting services\n4. Investment information and procedures\n5. Local business environment and regulations\n\nAdditional questions:\n- Service application procedures\n- Required documents and preparations\n- Service costs and fees\n- Expected processing time\n- Local business culture and practices\n\nAvailable contact time: [Available time]\nPhone: [Phone number]\n\nWe look forward to your response for detailed consultation.\n\nBest regards,\n\n[Name]\n[Company Name]\n[Position]\n[Contact]"""
+        body = f"""Dear {row['organizationName']} Team,
+
+I am [Name] from South Korea.
+
+We are exploring business opportunities in {row['country']} and would like to inquire about the support services provided by {row['organizationName']}.
+
+Main inquiries:
+1. Market entry support programs for {row['country']}
+2. Local partner connection services
+3. Market research and consulting services
+4. Investment information and procedures
+5. Local business environment and regulations
+
+Additional questions:
+- Service application procedures
+- Required documents and preparations
+- Service costs and fees
+- Expected processing time
+- Local business culture and practices
+
+We look forward to your response for detailed consultation.
+
+Best regards,
+
+[Name]"""
     elif region == 'middleEast':
         subject = f"[استفسار تصدير] طلب استشارة حول دخول سوق {row['country']}"
-        body = f"""عزيزي فريق {row['organizationName']}،\n\nأنا [الاسم] من [اسم الشركة] في كوريا الجنوبية.\n\nنحن نفكر في التوسع في أعمالنا إلى {row['country']} ونود الاستفسار عن خدمات الدعم المقدمة من {row['organizationName']}.\n\nالاستفسارات الرئيسية:\n1. برامج دعم دخول السوق لـ {row['country']}\n2. خدمات ربط الشركاء المحليين\n3. خدمات أبحاث السوق والاستشارات\n4. معلومات الاستثمار والإجراءات\n5. معلومات اللوائح المحلية\n\nأسئلة إضافية:\n- إجراءات طلب الخدمة\n- المستندات المطلوبة والتحضيرات\n- تكاليف الخدمة\n- الوقت المتوقع للمعالجة\n- ثقافة الأعمال المحلية\n\nالوقت المتاح للاتصال: [الوقت المتاح]\nالهاتف: [رقم الهاتف]\n\nنتطلع إلى ردكم للاستشارة التفصيلية.\n\nمع أطيب التحيات،\n\n[الاسم]\n[اسم الشركة]\n[المنصب]\n[معلومات الاتصال]"""
+        body = f"""عزيزي فريق {row['organizationName']}،
+
+أنا [الاسم] من كوريا الجنوبية.
+
+نحن نفكر في التوسع في أعمالنا إلى {row['country']} ونود الاستفسار عن خدمات الدعم المقدمة من {row['organizationName']}.
+
+الاستفسارات الرئيسية:
+1. برامج دعم دخول السوق لـ {row['country']}
+2. خدمات ربط الشركاء المحليين
+3. خدمات أبحاث السوق والاستشارات
+4. معلومات الاستثمار والإجراءات
+5. معلومات اللوائح المحلية
+
+أسئلة إضافية:
+- إجراءات طلب الخدمة
+- المستندات المطلوبة والتحضيرات
+- تكاليف الخدمة
+- الوقت المتوقع للمعالجة
+- ثقافة الأعمال المحلية
+
+نتطلع إلى ردكم للاستشارة التفصيلية.
+
+مع أطيب التحيات،
+
+[الاسم]"""
     elif region == 'centralAsia':
         subject = f"[Экспортный запрос] Запрос консультации по выходу на рынок {row['country']}"
-        body = f"""Уважаемая команда {row['organizationName']},\n\nЯ [Имя] из [Название компании] в Южной Корее.\n\nМы рассматриваем возможность расширения нашего бизнеса в {row['country']} и хотели бы узнать о услугах поддержки, предоставляемых {row['organizationName']}.\n\nОсновные вопросы:\n1. Программы поддержки выхода на рынок {row['country']}\n2. Услуги по подключению местных партнеров\n3. Услуги по исследованию рынка и консультированию\n4. Информация об инвестициях и процедурах\n5. Информация о местных правилах\n\nДополнительные вопросы:\n- Процедуры подачи заявки на услуги\n- Необходимые документы и подготовка\n- Стоимость услуг\n- Ожидаемое время обработки\n- Местная деловая культура\n\nДоступное время для связи: [Доступное время]\nТелефон: [Номер телефона]\n\nМы с нетерпением ждем вашего ответа для подробной консультации.\n\nС наилучшими пожеланиями,\n\n[Имя]\n[Название компании]\n[Должность]\n[Контакт]"""
+        body = f"""Уважаемая команда {row['organizationName']},
+
+Я [Имя] из Южной Кореи.
+
+Мы рассматриваем возможность расширения нашего бизнеса в {row['country']} и хотели бы узнать о услугах поддержки, предоставляемых {row['organizationName']}.
+
+Основные вопросы:
+1. Программы поддержки выхода на рынок {row['country']}
+2. Услуги по подключению местных партнеров
+3. Услуги по исследованию рынка и консультированию
+4. Информация об инвестициях и процедурах
+5. Информация о местных правилах
+
+Дополнительные вопросы:
+- Процедуры подачи заявки на услуги
+- Необходимые документы и подготовка
+- Стоимость услуг
+- Ожидаемое время обработки
+- Местная деловая культура
+
+Мы с нетерпением ждем вашего ответа для подробной консультации.
+
+С наилучшими пожеланиями,
+
+[Имя]"""
     elif region == 'oceania':
         subject = f"[Export Inquiry] Request for Consultation on Entering {row['country']} Market"
-        body = f"""Dear {row['organizationName']} Team,\n\nI am [Name] from [Company Name] in South Korea.\n\nWe are interested in expanding our business to {row['country']} and would like to inquire about the support services provided by {row['organizationName']}.\n\nMain inquiries:\n1. Market entry support programs for {row['country']}\n2. Local partner connection services\n3. Market research and consulting services\n4. Investment information and procedures\n5. Local business environment and regulations\n\nAdditional questions:\n- Service application procedures\n- Required documents and preparations\n- Service costs and fees\n- Expected processing time\n- Local business culture and practices\n\nAvailable contact time: [Available time]\nPhone: [Phone number]\n\nWe look forward to your response for detailed consultation.\n\nBest regards,\n\n[Name]\n[Company Name]\n[Position]\n[Contact]"""
+        body = f"""Dear {row['organizationName']} Team,
+
+I am [Name] from South Korea.
+
+We are interested in expanding our business to {row['country']} and would like to inquire about the support services provided by {row['organizationName']}.
+
+Main inquiries:
+1. Market entry support programs for {row['country']}
+2. Local partner connection services
+3. Market research and consulting services
+4. Investment information and procedures
+5. Local business environment and regulations
+
+Additional questions:
+- Service application procedures
+- Required documents and preparations
+- Service costs and fees
+- Expected processing time
+- Local business culture and practices
+
+We look forward to your response for detailed consultation.
+
+Best regards,
+
+[Name]"""
     else:
         subject = f"[Export Inquiry] Request for Consultation"
         body = f"Dear {row['organizationName']} Team, ..."
