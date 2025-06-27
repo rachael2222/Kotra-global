@@ -42,8 +42,314 @@ st.markdown("""
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         margin-bottom: 2rem;
     }
+    .email-template {
+        background-color: #e8f4fd;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+        margin: 1rem 0;
+    }
+    .copy-button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 0.5rem;
+    }
 </style>
 """, unsafe_allow_html=True)
+
+# 지역별 이메일 템플릿 함수
+def get_email_template(country: str, organization_name: str, contact_email: str) -> str:
+    """국가별 맞춤 이메일 템플릿 생성"""
+    
+    # 지역별 기본 템플릿
+    templates = {
+        "동아시아": {
+            "subject": f"[비즈니스 문의] {country} 진출 관련 상담 요청",
+            "body": f"""안녕하세요,
+
+{organization_name} 담당자님께,
+
+저는 한국의 [회사명]에서 근무하고 있는 [이름]입니다.
+
+{country} 시장 진출을 고려하고 있어 {organization_name}의 지원 서비스에 대해 문의드립니다.
+
+주요 관심사항:
+- {country} 시장 진출 전략 수립 지원
+- 현지 파트너사 연결 지원
+- 투자 환경 및 규제 정보 제공
+- 무역 촉진 프로그램 참여 방법
+
+상세한 상담을 위해 연락드립니다.
+
+감사합니다.
+
+[이름]
+[회사명]
+[직책]
+[연락처]
+[이메일]"""
+        },
+        "동남아시아": {
+            "subject": f"[Business Inquiry] Consultation Request for {country} Market Entry",
+            "body": f"""Dear {organization_name} Team,
+
+I hope this email finds you well.
+
+I am [Name] from [Company Name] in South Korea, and I am reaching out regarding potential business opportunities in {country}.
+
+We are interested in exploring the {country} market and would appreciate your guidance on:
+
+- Market entry strategies for {country}
+- Local partnership opportunities
+- Investment incentives and regulations
+- Trade promotion programs
+- Business networking events
+
+We would be grateful for any information or assistance you could provide.
+
+Thank you for your time and consideration.
+
+Best regards,
+
+[Name]
+[Position]
+[Company Name]
+[Contact Number]
+[Email Address]"""
+        },
+        "유럽": {
+            "subject": f"[Business Cooperation] Partnership Inquiry for {country} Market",
+            "body": f"""Dear {organization_name} Representatives,
+
+I hope this message finds you well.
+
+I am writing on behalf of [Company Name], a South Korean company interested in establishing business relationships in {country}.
+
+We are seeking your assistance in:
+
+- Understanding the {country} business environment
+- Identifying potential business partners
+- Learning about investment opportunities
+- Accessing trade facilitation services
+- Participating in business events
+
+We would appreciate any guidance or information you could provide.
+
+Thank you for your attention to this matter.
+
+Kind regards,
+
+[Name]
+[Position]
+[Company Name]
+[Contact Information]
+[Email]"""
+        },
+        "북미": {
+            "subject": f"[Business Development] Market Entry Consultation for {country}",
+            "body": f"""Dear {organization_name} Team,
+
+I hope you are doing well.
+
+I am [Name] from [Company Name] in South Korea, and I am reaching out to explore business opportunities in {country}.
+
+We are interested in:
+
+- Market entry strategies for {country}
+- Business development opportunities
+- Investment and trade programs
+- Networking with local businesses
+- Regulatory compliance information
+
+We would greatly appreciate your guidance and support.
+
+Thank you for your time.
+
+Best regards,
+
+[Name]
+[Title]
+[Company Name]
+[Phone]
+[Email]"""
+        },
+        "남미": {
+            "subject": f"[Consulta Comercial] Solicitud de Asesoramiento para {country}",
+            "body": f"""Estimados representantes de {organization_name},
+
+Espero que este mensaje les encuentre bien.
+
+Soy [Nombre] de [Nombre de la Empresa] en Corea del Sur, y me dirijo a ustedes para explorar oportunidades comerciales en {country}.
+
+Estamos interesados en:
+
+- Estrategias de entrada al mercado de {country}
+- Oportunidades de asociación comercial
+- Programas de inversión y comercio
+- Información sobre regulaciones comerciales
+- Eventos de networking empresarial
+
+Agradeceríamos cualquier orientación o información que puedan proporcionar.
+
+Gracias por su atención.
+
+Saludos cordiales,
+
+[Nombre]
+[Cargo]
+[Nombre de la Empresa]
+[Información de Contacto]
+[Correo Electrónico]"""
+        },
+        "아프리카": {
+            "subject": f"[Business Partnership] Market Entry Inquiry for {country}",
+            "body": f"""Dear {organization_name} Team,
+
+I hope this email finds you well.
+
+I am [Name] from [Company Name] in South Korea, and I am writing to explore business opportunities in {country}.
+
+We are interested in:
+
+- Market entry strategies for {country}
+- Investment opportunities and incentives
+- Trade facilitation services
+- Business partnership programs
+- Regulatory and compliance information
+
+We would appreciate your guidance and support in understanding the {country} market.
+
+Thank you for your time and consideration.
+
+Best regards,
+
+[Name]
+[Position]
+[Company Name]
+[Contact Details]
+[Email Address]"""
+        },
+        "중동": {
+            "subject": f"[Business Inquiry] Market Entry Consultation for {country}",
+            "body": f"""Dear {organization_name} Representatives,
+
+I hope this message finds you well.
+
+I am [Name] from [Company Name] in South Korea, and I am reaching out regarding business opportunities in {country}.
+
+We are seeking information about:
+
+- Market entry strategies for {country}
+- Investment and trade opportunities
+- Business partnership programs
+- Regulatory requirements
+- Trade facilitation services
+
+We would be grateful for your guidance and support.
+
+Thank you for your attention.
+
+Best regards,
+
+[Name]
+[Position]
+[Company Name]
+[Contact Information]
+[Email]"""
+        },
+        "오세아니아": {
+            "subject": f"[Business Development] Market Entry Inquiry for {country}",
+            "body": f"""Dear {organization_name} Team,
+
+I hope you are doing well.
+
+I am [Name] from [Company Name] in South Korea, and I am writing to explore business opportunities in {country}.
+
+We are interested in:
+
+- Market entry strategies for {country}
+- Investment and trade opportunities
+- Business partnership programs
+- Regulatory information
+- Trade facilitation services
+
+We would appreciate your guidance and support.
+
+Thank you for your time.
+
+Best regards,
+
+[Name]
+[Position]
+[Company Name]
+[Contact Details]
+[Email]"""
+        }
+    }
+    
+    # 국가별 지역 분류
+    region_mapping = {
+        # 동아시아
+        "중국": "동아시아", "일본": "동아시아", "대만": "동아시아", "홍콩": "동아시아", "마카오": "동아시아",
+        # 동남아시아
+        "태국": "동남아시아", "베트남": "동남아시아", "말레이시아": "동남아시아", "인도네시아": "동남아시아", 
+        "필리핀": "동남아시아", "싱가포르": "동남아시아", "미얀마": "동남아시아", "캄보디아": "동남아시아",
+        "라오스": "동남아시아", "브루나이": "동남아시아", "동티모르": "동남아시아",
+        # 유럽
+        "독일": "유럽", "프랑스": "유럽", "영국": "유럽", "이탈리아": "유럽", "스페인": "유럽", "네덜란드": "유럽",
+        "벨기에": "유럽", "스위스": "유럽", "오스트리아": "유럽", "스웨덴": "유럽", "노르웨이": "유럽",
+        "덴마크": "유럽", "핀란드": "유럽", "폴란드": "유럽", "체코": "유럽", "헝가리": "유럽",
+        "슬로바키아": "유럽", "슬로베니아": "유럽", "크로아티아": "유럽", "루마니아": "유럽",
+        "불가리아": "유럽", "그리스": "유럽", "포르투갈": "유럽", "아일랜드": "유럽",
+        "룩셈부르크": "유럽", "몰타": "유럽", "키프로스": "유럽", "에스토니아": "유럽",
+        "라트비아": "유럽", "리투아니아": "유럽", "몰도바": "유럽", "알바니아": "유럽",
+        "북마케도니아": "유럽", "보스니아헤르체고비나": "유럽", "몬테네그로": "유럽",
+        "코소보": "유럽", "세르비아": "유럽", "우크라이나": "유럽", "벨라루스": "유럽",
+        # 북미
+        "미국": "북미", "캐나다": "북미", "멕시코": "북미",
+        # 남미
+        "브라질": "남미", "아르헨티나": "남미", "칠레": "남미", "콜롬비아": "남미", "페루": "남미",
+        "베네수엘라": "남미", "에콰도르": "남미", "볼리비아": "남미", "파라과이": "남미",
+        "우루과이": "남미", "가이아나": "남미", "수리남": "남미", "프랑스령기아나": "남미",
+        # 아프리카
+        "남아프리카공화국": "아프리카", "이집트": "아프리카", "나이지리아": "아프리카", "케냐": "아프리카",
+        "모로코": "아프리카", "튀니지": "아프리카", "알제리": "아프리카", "가나": "아프리카",
+        "에티오피아": "아프리카", "탄자니아": "아프리카", "우간다": "아프리카", "세네갈": "아프리카",
+        "카메룬": "아프리카", "코트디부아르": "아프리카", "부르키나파소": "아프리카", "말리": "아프리카",
+        "니제르": "아프리카", "차드": "아프리카", "수단": "아프리카", "남수단": "아프리카",
+        "에리트레아": "아프리카", "지부티": "아프리카", "소말리아": "아프리카", "코모로": "아프리카",
+        "세이셸": "아프리카", "모리셔스": "아프리카", "마다가스카르": "아프리카", "모잠비크": "아프리카",
+        "짐바브웨": "아프리카", "잠비아": "아프리카", "말라위": "아프리카", "보츠와나": "아프리카",
+        "나미비아": "아프리카", "앙골라": "아프리카", "콩고민주공화국": "아프리카", "콩고공화국": "아프리카",
+        "가봉": "아프리카", "적도기니": "아프리카", "상투메프린시페": "아프리카", "카보베르데": "아프리카",
+        "기니비사우": "아프리카", "기니": "아프리카", "시에라리온": "아프리카", "라이베리아": "아프리카",
+        # 중동
+        "사우디아라비아": "중동", "아랍에미리트": "중동", "카타르": "중동", "쿠웨이트": "중동",
+        "바레인": "중동", "오만": "중동", "요르단": "중동", "레바논": "중동", "시리아": "중동",
+        "이라크": "중동", "이란": "중동", "이스라엘": "중동", "팔레스타인": "중동", "예멘": "중동",
+        # 오세아니아
+        "호주": "오세아니아", "뉴질랜드": "오세아니아", "파푸아뉴기니": "오세아니아", "피지": "오세아니아",
+        "솔로몬제도": "오세아니아", "바누아투": "오세아니아", "사모아": "오세아니아", "통가": "오세아니아",
+        "키리바시": "오세아니아", "투발루": "오세아니아", "나우루": "오세아니아", "팔라우": "오세아니아",
+        "마셜제도": "오세아니아", "미크로네시아": "오세아니아", "몰디브": "오세아니아"
+    }
+    
+    # 국가에 해당하는 지역 찾기
+    region = region_mapping.get(country, "동아시아")  # 기본값은 동아시아
+    
+    template = templates.get(region, templates["동아시아"])
+    
+    # 이메일 내용 생성
+    email_content = f"""To: {contact_email}
+Subject: {template['subject']}
+
+{template['body']}"""
+    
+    return email_content
 
 # 150여개국 데이터
 @st.cache_data
@@ -2243,6 +2549,28 @@ def main():
                 <p><strong>설명:</strong> {row['description']}</p>
             </div>
             """, unsafe_allow_html=True)
+            
+            # 이메일 자동 생성 기능
+            if st.button(f"📧 {row['country']} 이메일 템플릿 생성", key=f"email_btn_{idx}"):
+                email_template = get_email_template(
+                    row['country'], 
+                    row['organizationName'], 
+                    row['email']
+                )
+                
+                st.markdown('<div class="email-template">', unsafe_allow_html=True)
+                st.subheader(f"📧 {row['country']} 맞춤 이메일 템플릿")
+                st.text_area(
+                    "이메일 내용",
+                    value=email_template,
+                    height=400,
+                    key=f"email_text_{idx}"
+                )
+                
+                # 복사 버튼
+                if st.button("📋 클립보드에 복사", key=f"copy_btn_{idx}"):
+                    st.write("이메일 내용이 클립보드에 복사되었습니다!")
+                st.markdown('</div>', unsafe_allow_html=True)
     else:
         st.warning("검색 결과가 없습니다.")
     
